@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Hostel Details Implementation</title>
+    <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="CSS/hostels.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e2e6ea;
+            border-radius: 8px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .hostel-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .hostel-stats div {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Hostel Details Implementation Test</h1>
+        
+        <!-- Test Magsi Hostel -->
+        <div class="test-section">
+            <h3>Yousaf Aziz Magsi Hostel – Block A</h3>
+            <div class="hostel-stats">
+                <div><strong>Total Rooms:</strong> -</div>
+                <div><strong>Total Capacity:</strong> -</div>
+                <div><strong>Occupied Slots:</strong> 14</div>
+                <div><strong>Empty Slots:</strong> -</div>
+            </div>
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Name of Students</th>
+                                <th>Reg No</th>
+                                <th>Department</th>
+                                <th>Room No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Junaid Ahmed</td>
+                                <td>2k22-Agri-18</td>
+                                <td>Agriculture</td>
+                                <td>A-01</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Sultan Jan</td>
+                                <td>2k22-Agri-39</td>
+                                <td>Agriculture</td>
+                                <td>A-01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Fazail Ur Rehman</td>
+                                <td>2k22-M-Phil-02</td>
+                                <td>VAS</td>
+                                <td>A-01</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Zia Ur Rehman</td>
+                                <td>2k23-Eng-23</td>
+                                <td>English</td>
+                                <td>A-01</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Afi Ullah</td>
+                                <td>2k23-Edu-107</td>
+                                <td>Education</td>
+                                <td>A-01</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Hingol Hostel -->
+        <div class="test-section">
+            <h3>Hingol Hostel – Ground Floor</h3>
+            <div class="hostel-stats">
+                <div><strong>Total Rooms:</strong> -</div>
+                <div><strong>Total Capacity:</strong> -</div>
+                <div><strong>Occupied Slots:</strong> 10</div>
+                <div><strong>Empty Slots:</strong> -</div>
+            </div>
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Name of Students</th>
+                                <th>Reg No</th>
+                                <th>Department</th>
+                                <th>Room No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Ahmed Ali</td>
+                                <td>2k22-CS-15</td>
+                                <td>Computer Science</td>
+                                <td>H-01</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Sara Khan</td>
+                                <td>2k23-IT-22</td>
+                                <td>Information Technology</td>
+                                <td>H-01</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Muhammad Hassan</td>
+                                <td>2k21-EE-08</td>
+                                <td>Electrical Engineering</td>
+                                <td>H-01</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Fatima Ahmed</td>
+                                <td>2k22-ME-12</td>
+                                <td>Mechanical Engineering</td>
+                                <td>H-02</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Ali Raza</td>
+                                <td>2k23-CE-05</td>
+                                <td>Civil Engineering</td>
+                                <td>H-02</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Empty Hostel -->
+        <div class="test-section">
+            <h3>Test Hostel – Block A</h3>
+            <div class="hostel-stats">
+                <div><strong>Total Rooms:</strong> -</div>
+                <div><strong>Total Capacity:</strong> -</div>
+                <div><strong>Occupied Slots:</strong> 0</div>
+                <div><strong>Empty Slots:</strong> -</div>
+            </div>
+            <p class="no-data">No students assigned yet</p>
+        </div>
+    </div>
+</body>
+</html>
+

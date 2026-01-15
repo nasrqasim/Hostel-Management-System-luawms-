@@ -1,0 +1,332 @@
+ /*
+    users.css: Styling for the user management page.
+    This file works in conjunction with dashboard.css to maintain a consistent look.
+*/
+
+/* --- User List and Table Styling --- */
+.user-list-section {
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+}
+
+.users-table-container {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 600px;
+}
+
+.users-table th,
+.users-table td {
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.users-table th {
+    background-color: #f8f8f8;
+    color: #444;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.users-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.users-table td .action-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+}
+
+/* Distinct styling for edit and delete buttons on user cards */
+.user-actions .edit-btn {
+    background-color: #0d6efd; /* blue */
+    color: #fff;
+}
+
+.user-actions .edit-btn:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+.user-actions .delete-btn {
+    background-color: #dc3545; /* red */
+    color: #fff;
+}
+
+.user-actions .delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* --- User Add Form Styling --- */
+.user-add-section {
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+}
+
+.user-add-section h2 {
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 0.25rem;
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.action-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    color: #fff;
+}
+
+.action-button.add {
+    background-color: #28a745;
+}
+
+.action-button.add:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.message {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+/* --- Modal Styling --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 2.5rem;
+    border: 1px solid #888;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.modal-content .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.modal-content .action-button {
+    min-width: 120px;
+}
+
+.modal-content .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content .close-button:hover,
+.modal-content .close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Delete/Cancel buttons styling for Users delete modal */
+#confirmDeleteBtn.action-button.delete {
+    background-color: #dc3545;
+}
+
+#confirmDeleteBtn.action-button.delete:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+#cancelDeleteBtn.action-button.cancel {
+    background-color: #6c757d;
+}
+
+#cancelDeleteBtn.action-button.cancel:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+/* This is a simple fix */
+input[type="email"] {
+    display: block;
+    width: 100%;
+    /* Add any other consistent styles here if needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .users-container {
+        flex-direction: column;
+    }
+
+    .user-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user-info {
+        text-align: center;
+    }
+    .users-table th,
+    .users-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .users-table thead {
+        display: none;
+    }
+
+    .users-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 1rem;
+        display: block;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .users-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    .users-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        width: 45%;
+        text-align: left;
+        font-weight: 600;
+        color: #555;
+        text-transform: uppercase;
+    }
+    
+    .users-table td:last-child {
+        border-bottom: none;
+    }
+}
+
+/* --- Modal Styling --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 2.5rem;
+    border: 1px solid #888;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}

@@ -1,0 +1,155 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS - Hostels</title>
+    <!--
+        CSS PATHS:
+        This assumes 'hostels.html' is in the 'HTML' folder.
+        '../' goes up one level to the project root, then into the 'CSS' folder.
+    -->
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="../CSS/hostels.css">
+    <link rel="stylesheet" href="../CSS/unified-cards.css">
+    <!-- Google Fonts for 'Inter' -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Main container for the entire dashboard layout -->
+    <div class="dashboard-container">
+        <!-- Top navigation bar -->
+        <header class="navbar">
+            <div class="welcome-message" id="welcomeMessage"></div>
+            <div class="navbar-right">
+                <!-- Search bar for filtering content -->
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." id="searchBar">
+                </div>
+                <!-- Logout button -->
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </header>
+        
+        <!-- Sidebar navigation -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="hostels.html" class="active">Hostels</a></li>
+                    <li><a href="HostelDetails.html">Hostel Details</a></li>
+                    <li><a href="users.html">Users</a></li>
+                    <li><a href="logs.html">Log/History</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="feeManagement.html">Fee Management</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main content area -->
+        <main class="main-content">
+            <!-- Section to display the list of hostels -->
+            <section class="hostel-list-section">
+                <h2>Our Hostels</h2>
+                <!-- This container will be populated dynamically by JavaScript -->
+                <div class="hostel-cards-container cards-grid-3" id="hostelCardsContainer">
+                </div>
+            </section>
+
+            <!-- Section for managing hostels (add/update/delete) -->
+            <section class="hostel-form-section" id="hostelFormSection">
+                <h2>Manage Hostels</h2>
+                <form id="hostelForm">
+                    <!-- Form group for entering the hostel name -->
+                    <div class="form-group">
+                        <label for="hostelName">Name of Hostel</label>
+                        <input type="text" id="hostelName" placeholder="Enter hostel name" required>
+                    </div>
+                    <!-- Form group for selecting the warden -->
+                    <div class="form-group">
+                        <label for="wardenInput">Warden Name</label>
+                        <input type="text" id="wardenInput" placeholder="Enter warden's name">
+                    </div>
+                    <!-- Form group for hostel capacity -->
+                    <div class="form-group">
+                        <label for="hostelCapacity">Capacity (Optional)</label>
+                        <input type="number" id="hostelCapacity" placeholder="Enter capacity">
+                    </div>
+                    <!-- Extended fields: number of rooms and capacity per room -->
+                    <div class="form-group">
+                        <label for="numberOfRooms">Number of Rooms</label>
+                        <input type="number" id="numberOfRooms" placeholder="e.g., 70">
+                    </div>
+                    <div class="form-group">
+                        <label for="capacityPerRoom">Capacity per Room</label>
+                        <input type="number" id="capacityPerRoom" placeholder="e.g., 3 or 4">
+                    </div>
+                    <!-- New: blocks auto-generation -->
+                    <div class="form-group">
+                        <label for="numberOfBlocks">Number of Blocks (optional)</label>
+                        <input type="number" id="numberOfBlocks" placeholder="e.g., 4">
+                    </div>
+                    <!-- Blocks (optional, advanced) -->
+                    <div class="form-group">
+                        <label>Blocks (advanced, optional)</label>
+                        <div id="blocksContainer"></div>
+                        <button type="button" id="addBlockBtn" class="action-button">Add Block</button>
+                        <small>If you leave this empty but fill Number of Blocks and Number of Rooms, blocks A, B, C… will be generated automatically with rooms distributed evenly.</small>
+                    </div>
+                    <!-- Form group for image upload -->
+                    <div class="form-group">
+                        <label for="hostelImage">Image</label>
+                        <input type="file" id="hostelImage" accept="image/*">
+                    </div>
+                    <!-- Buttons for form actions -->
+                    <div class="button-group">
+                        <button type="submit" id="addHostelBtn" class="action-button add">Add Hostel</button>
+                        <button type="button" id="updateHostelBtn" class="action-button edit" style="display: none;">Update Hostel</button>
+                        <button type="button" id="cancelEditBtn" class="action-button cancel" style="display: none;">Cancel Edit</button>
+                    </div>
+                </form>
+                <!-- Paragraph to display messages (success/error) to the user -->
+                <p id="hostelMessage" class="message"></p>
+            </section>
+        </main>
+    </div>
+    <!-- Modal for delete confirmation -->
+    <div id="deleteModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Request Deletion</h2>
+        <div class="form-group">
+            <label for="deleteHostelName">Hostel to Delete</label>
+            <input type="text" id="deleteHostelName" readonly>
+        </div>
+        <div class="form-group">
+            <label for="deleteReason">Reason for Deletion</label>
+            <textarea id="deleteReason" placeholder="Enter reason here..." rows="4"></textarea>
+        </div>
+        <div class="user-info">
+            <p><strong>Your Information:</strong></p>
+            <p><strong>Name:</strong> <span id="deleterName"></span></p>
+            <p><strong>Role:</strong> <span id="deleterRole"></span></p>
+            <p><strong>Contact:</strong> <span id="deleterContact"></span></p>
+            <p><strong>Designation:</strong> <span id="deleterDesignation"></span></p>
+        </div>
+        <div class="button-group">
+            <button id="confirmDeleteBtn" class="action-button delete">Send Request</button>
+            <button id="cancelDeleteBtn" class="action-button cancel">Cancel</button>
+        </div>
+        <p id="deleteModalMessage" class="message"></p>
+      </div>
+    </div>
+    <!--
+        JAVASCRIPT PATH:
+        This path assumes 'hostels.js' is in the 'js' folder,
+        which is a sibling to the 'HTML' folder.
+        The 'type="module"' attribute is important for ES6 modules.
+    -->
+    <script src="../JS/cleanup.js"></script>
+    <script type="module" src="../JS/apiHelper.js"></script>
+    <script type="module" src="../JS/hostel.js"></script>
+</body>
+</html>

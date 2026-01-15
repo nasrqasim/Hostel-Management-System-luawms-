@@ -1,0 +1,197 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUAWMS Hostels</title>
+    <!--
+        CORRECTED CSS PATH:
+        This path assumes your 'index.html' is in an 'HTML' folder,
+        and your 'style.css' is in a 'CSS' folder,
+        and both 'HTML' and 'CSS' folders are siblings within your main project directory.
+        '../' goes up one level from the 'HTML' folder to the project root,
+        then 'CSS/' goes into the 'CSS' folder to find 'style.css'.
+    -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/unified-cards.css">
+    <!-- Google Fonts for 'Inter' -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Navbar-specific styles to match LUAWMS-inspired layout -->
+    <style>
+        .main-header { 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-start; 
+            gap: 16px; 
+            padding: 10px 20px; 
+            background: #ffffff; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+        .nav-left { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 16px; 
+            min-width: 0; 
+        }
+        .logo .logo-link { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 10px; 
+            text-decoration: none; 
+            color: #0e458a; 
+            white-space: nowrap; 
+            font-weight: 700; 
+            font-size: 16px; 
+        }
+        .luawms-logo { 
+            width: 46px; 
+            height: auto; 
+            flex: 0 0 auto; 
+        }
+        .search-container { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            background: #f4f6f8; 
+            padding: 6px 8px; 
+            border-radius: 999px; 
+            border: 1px solid #e4e7eb; 
+            min-width: 280px; 
+            max-width: 520px; 
+            margin-left: auto; /* push search to the right side */
+        }
+        #mainSearchBar { 
+            flex: 1 1 auto; 
+            min-width: 0; 
+            border: none; 
+            background: transparent; 
+            outline: none; 
+            padding: 6px 10px; 
+            font-size: 14px; 
+        }
+        .search-button, .clear-search-button { 
+            width: 34px; 
+            height: 34px; 
+            border: none; 
+            background: #0e458a; 
+            color: #fff; 
+            border-radius: 50%; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+        }
+        .clear-search-button { 
+            background: #525a65; 
+        }
+        .login-button { 
+            padding: 8px 16px; 
+            background: #0e7ae6; 
+            color: #fff; 
+            border: none; 
+            border-radius: 999px; 
+            font-weight: 600; 
+            cursor: pointer; 
+        }
+        @media (max-width: 900px) {
+            .logo .logo-link { font-size: 14px; }
+            .search-container { min-width: 220px; max-width: 420px; }
+        }
+        @media (max-width: 640px) {
+            .main-header { flex-wrap: wrap; gap: 10px; }
+            .nav-left { width: auto; }
+            .search-container { order: 2; width: 100%; margin-left: 0; }
+            .login-button { order: 3; }
+            .logo .logo-link span { white-space: normal; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="nav-left">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <!--
+                        IMAGE PATH:
+                        This path assumes 'images.1' is a sibling folder to 'HTML' and 'CSS'
+                        within your main project directory.
+                    -->
+                    <img src="../images.1/Logo.png" alt="LUAWMS Logo" onerror="this.onerror=null;this.src='https://placehold.co/50x50/cccccc/000000?text=LOGO';" class="luawms-logo">
+                    <span>LASBELA UNIVERSITY OF AGRICULTURE, WATER AND MARINE SCIENCES</span>
+                </a>
+            </div>
+        </div>
+        <div class="search-container">
+            <!-- Main search input bar -->
+            <input type="text" id="mainSearchBar" placeholder="Search...">
+            <!-- Search button with SVG icon -->
+            <button class="search-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
+                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35"/>
+                </svg>
+            </button>
+            <!-- Clear search button with SVG icon (initially hidden) -->
+            <button class="clear-search-button" id="clearSearchBar">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
+                    <path d="M6.41 6.41a1 1 0 011.41 0L12 10.59l4.18-4.18a1 1 0 111.41 1.41L13.41 12l4.18 4.18a1 1 0 01-1.41 1.41L12 13.41l-4.18 4.18a1 1 0 01-1.41-1.41L10.59 12 6.41 7.82a1 1 0 010-1.41z"/>
+                </svg>
+            </button>
+        </div>
+        <!-- Login button, linking to login.html -->
+        <button class="login-button" onclick="window.location.href='login.html'">Login</button>
+    </header>
+
+    <section class="hero-section">
+        <!-- Hero overlay with banner image and text. -->
+        <div class="hero-overlay" style="background-image: url('../images.1/banner.png');">
+            <h1>Hostels of Lasbela University of Agriculture, Water and Marine Sciences, Uthal</h1>
+        </div>
+    </section>
+
+    <section class="hostel-cards-section">
+        <h2>Explore Our Hostels</h2>
+        <div class="hostel-grid cards-grid-2">
+            <!-- Hostel Card: Armabel -->
+            <div class="hostel-card card" data-hostel="Armabel">
+                <img src="../images.1/h1.jpg" alt="Armabel Hostel" onerror="this.onerror=null;this.src='https://placehold.co/400x250/e0e0e0/333333?text=Armabel+Hostel';">
+                <div class="card-info">
+                    <h3>Armabel Hostel</h3>
+                </div>
+            </div>
+            <!-- Hostel Card: Hingol -->
+            <div class="hostel-card card" data-hostel="Hingol">
+                <img src="../images.1/h1.jpg" alt="Hingol Hostel" onerror="this.onerror=null;this.src='https://placehold.co/400x250/e0e0e0/333333?text=Hingol+Hostel';">
+                <div class="card-info">
+                    <h3>Hingol Hostel</h3>
+                </div>
+            </div>
+            <!-- Hostel Card: Porali -->
+            <div class="hostel-card card" data-hostel="Porali">
+                <img src="../images.1/h1.jpg" alt="Porali Hostel" onerror="this.onerror=null;this.src='https://placehold.co/400x250/e0e0e0/333333?text=Porali+Hostel';">
+                <div class="card-info">
+                    <h3>Porali Hostel</h3>
+                </div>
+            </div>
+            <!-- Hostel Card: Magsi -->
+            <div class="hostel-card card magsi-card" data-hostel="Magsi">
+                <img src="../images.1/h1.jpg" alt="Magsi Hostel" onerror="this.onerror=null;this.src='https://placehold.co/400x250/e0e0e0/333333?text=Magsi+Hostel';">
+                <div class="card-info">
+                    <h3>Magsi Hostel</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+        JAVASCRIPT PATH:
+        This path assumes your 'JS' folder is a sibling to 'HTML' and 'CSS'
+        within your main project directory.
+    -->
+    <script src="../JS/cleanup.js"></script>
+    <script type="module" src="../JS/apiHelper.js"></script>
+    <script type="module" src="../JS/landing.js"></script>
+</body>
+</html>

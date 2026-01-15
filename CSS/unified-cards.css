@@ -1,0 +1,471 @@
+/* Unified Card System for Hostel Management System */
+
+/* ===== SHARED CARD COMPONENTS ===== */
+
+/* Base Card Class - Applied to all cards across the system */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8ecf0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Content */
+.card-content {
+    padding: 24px;
+}
+
+.card-header {
+    padding: 20px 24px 16px 24px;
+    border-bottom: 1px solid #f0f4f8;
+    background: #fafbfc;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.card-subtitle {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+.card-body {
+    padding: 20px 24px;
+}
+
+.card-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #f0f4f8;
+    background: #fafbfc;
+}
+
+/* ===== SPECIALIZED CARD TYPES ===== */
+
+/* Stat Cards (Dashboard) */
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+}
+
+.stat-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    opacity: 1;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card p {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+
+/* Hostel Cards */
+.hostel-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8ecf0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    min-height: 320px;
+}
+
+.hostel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.hostel-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0;
+    margin: 0;
+    transition: transform 0.3s ease;
+}
+
+.hostel-card:hover img {
+    transform: scale(1.05);
+}
+
+.hostel-card .card-info {
+    padding: 20px;
+}
+
+.hostel-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+}
+
+.hostel-card p {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.hostel-card .card-actions {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Activity Cards */
+.activity-item {
+    background: #ffffff;
+    border: 1px solid #e8ecf0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.activity-item:hover {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+.activity-item:last-child {
+    margin-bottom: 0;
+}
+
+.activity-timestamp {
+    font-size: 0.75rem;
+    color: #6c757d;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.activity-description {
+    font-size: 0.875rem;
+    color: #495057;
+    line-height: 1.4;
+}
+
+/* ===== CARD LAYOUTS ===== */
+
+/* Grid Layouts */
+.cards-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.cards-grid-2 {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.cards-grid-3 {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.cards-grid-4 {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.cards-grid-5 {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* Flex Layouts */
+.cards-flex {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.cards-flex-center {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+
+@media (max-width: 1200px) {
+    .cards-grid-5 {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .cards-grid-4 {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .cards-grid,
+    .cards-grid-2,
+    .cards-grid-3,
+    .cards-grid-4,
+    .cards-grid-5 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .cards-flex,
+    .cards-flex-center {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .card-content,
+    .card-header,
+    .card-body,
+    .card-footer {
+        padding: 16px;
+    }
+    
+    .hostel-card {
+        min-height: 280px;
+    }
+    
+    .hostel-card img {
+        height: 160px;
+    }
+    
+    .stat-card {
+        min-height: 120px;
+    }
+    
+    .stat-card p {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-content,
+    .card-header,
+    .card-body,
+    .card-footer {
+        padding: 12px;
+    }
+    
+    .hostel-card {
+        min-height: 260px;
+    }
+    
+    .hostel-card img {
+        height: 140px;
+    }
+    
+    .stat-card {
+        min-height: 100px;
+    }
+    
+    .stat-card p {
+        font-size: 1.75rem;
+    }
+    
+    .stat-card h4 {
+        font-size: 0.8rem;
+    }
+}
+
+/* ===== ENHANCED SHADOWS AND EFFECTS ===== */
+
+.card-elevated {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.card-elevated:hover {
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+}
+
+.card-subtle {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid #f0f4f8;
+}
+
+.card-subtle:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== COLOR VARIANTS ===== */
+
+.card-primary {
+    border-left: 4px solid #007bff;
+}
+
+.card-success {
+    border-left: 4px solid #28a745;
+}
+
+.card-warning {
+    border-left: 4px solid #ffc107;
+}
+
+.card-danger {
+    border-left: 4px solid #dc3545;
+}
+
+.card-info {
+    border-left: 4px solid #17a2b8;
+}
+
+/* ===== LOADING STATES ===== */
+
+.card-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* ===== INTEGRATION WITH EXISTING STYLES ===== */
+
+/* Override existing stats-cards to use unified system */
+.stats-cards.cards-grid-5 .stat-card {
+    margin: 0;
+    min-height: 140px;
+}
+
+/* Ensure hostel cards maintain proper aspect ratio */
+.hostel-cards-container.cards-grid-3 .hostel-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+}
+
+.hostel-cards-container.cards-grid-3 .hostel-card img {
+    flex: 0 0 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.hostel-cards-container.cards-grid-3 .hostel-card .card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Landing page hostel cards */
+.hostel-grid.cards-grid-2 .hostel-card {
+    min-height: 280px;
+}
+
+.hostel-grid.cards-grid-2 .hostel-card img {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Form sections as cards */
+.hostel-form-section,
+.add-student-section,
+.mark-payment-section,
+.defaulters-section,
+.all-challans-section,
+.logs-section {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8ecf0;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+/* Table containers as cards */
+.students-table-container,
+.defaulters-table-container,
+.challans-table-container,
+.logs-table-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e8ecf0;
+    overflow: hidden;
+}
+
+/* Activity list styling */
+.activity-list {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e8ecf0;
+    padding: 16px;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: 8px; }
+.p-2 { padding: 16px; }
+.p-3 { padding: 24px; }

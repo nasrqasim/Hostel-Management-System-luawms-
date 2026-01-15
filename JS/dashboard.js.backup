@@ -1,0 +1,77 @@
+ // Import Firebase modules
+const API_BASE = (localStorage.getItem('API_BASE') || 'http://localhost:4000/api').replace(/\/$/, '');
+
+// DOM elements
+const welcomeMessage = document.getElementById('welcomeMessage');
+const logoutButton = document.getElementById('logoutButton');
+const totalStudentsEl = document.getElementById('totalStudents');
+const totalUsersEl = document.getElementById('totalUsers');
+const recentActivityList = document.getElementById('recentActivityList');
+const searchBar = document.getElementById('searchBar');
+
+let allStudents = [];
+let allUsers = [];
+
+/**
+ * Updates the dashboard with real-time data from Firestore.
+ */
+const updateDashboard = () => {
+    // Listen for real-time updates on students
+    fetch(`${API_BASE}/students`).then(r=>r.json()).then(data=>{
+        allStudents = data;
+        if (totalStudentsEl) totalStudentsEl.textContent = data.length;
+    });
+
+    // Listen for real-time updates on users
+    fetch(`${API_BASE}/users`).then(r=>r.json()).then(data=>{
+        allUsers = data;
+        if (totalUsersEl) totalUsersEl.textContent = data.length;
+    });
+
+    // Listen for real-time updates on recent activity logs
+    fetch(`${API_BASE}/logs`).then(r=>r.json()).then(data=>{
+        const recentLogs = data.slice(0,5);
+        if (recentActivityList) {
+            recentActivityList.innerHTML = '';
+            recentLogs.forEach(log => {
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+                const date = log.createdAt ? new Date(log.createdAt).toLocaleString() : 'N/A';
+                item.innerHTML = `
+                    <span class="activity-timestamp">${date}</span>
+                    <span class="activity-description">${log.description || log.action || ''}</span>
+                `;
+                recentActivityList.appendChild(item);
+            });
+        }
+    });
+};
+
+// Handle authentication state change
+document.addEventListener('DOMContentLoaded', () => {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (!user) {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    if (welcomeMessage) {
+        welcomeMessage.textContent = `Welcome, ${user.username} (${user.role})!`;
+    }
+    
+    updateDashboard();
+});
+
+// Logout functionality
+logoutButton.addEventListener('click', () => {
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    window.location.href = 'login.html';
+});
+
+// Add search functionality for the dashboard search bar
+searchBar.addEventListener('input', (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    // This search is for demonstrative purposes and doesn't filter the actual dashboard data.
+    console.log(`Searching for: ${searchTerm}`);
+});

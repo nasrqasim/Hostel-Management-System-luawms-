@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS - Students</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="../CSS/students.css">
+    <link rel="stylesheet" href="../CSS/unified-cards.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header class="navbar">
+            <div class="welcome-message" id="welcomeMessage"></div>
+            <div class="navbar-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search students..." id="serverSearchInput">
+                    <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="hostels.html">Hostels</a></li>
+                    <li><a href="HostelDetails.html">Hostel Details</a></li>
+                    <li><a href="users.html">Users</a></li>
+                    <li><a href="logs.html">Log/History</a></li>
+                    <li><a href="students.html" class="active">Students</a></li>
+                    <li><a href="feeManagement.html">Fee Management</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <!-- Add New Student Section -->
+            <section class="add-student-section">
+                <div style="margin:6px 0 10px 0;">
+                    <a id="downloadStudentsPdfTop" class="action-button" href="#" style="display:none;">Download
+                        Students PDF</a>
+                </div>
+                <h2>Add New Student</h2>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label for="studentName">Student Name</label>
+                        <input type="text" id="studentName" placeholder="Enter student's full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentImage">Profile Picture (optional)</label>
+                        <input type="file" id="studentImage" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="fatherName">Father's Name</label>
+                        <input type="text" id="fatherName" placeholder="Enter father's full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registrationNumber">Registration Number</label>
+                        <input type="text" id="registrationNumber" placeholder="e.g., 2K23-CS-98" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="degree">Degree</label>
+                        <select id="degree" required>
+                            <option value="">Select Degree</option>
+                            <option value="Bachelors">Bachelors</option>
+                            <option value="Masters">Masters</option>
+                            <option value="PhD">PhD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" required>
+                            <option value="">Select Department</option>
+                            <option>Agriculture</option>
+                            <option>Civil Engineering</option>
+                            <option>Marine Science</option>
+                            <option>Geology</option>
+                            <option>Environment Science</option>
+                            <option>Water Resources Management</option>
+                            <option>Computer Science</option>
+                            <option>Economics</option>
+                            <option>Sociology</option>
+                            <option>Political Science</option>
+                            <option>International Relations</option>
+                            <option>Business Administration</option>
+                            <option>English</option>
+                            <option>Islamic Studies</option>
+                            <option>Education</option>
+                            <option>English (Linguistics)</option>
+                            <option>Marine Biology</option>
+                            <option>Marine Fisheries</option>
+                            <option>Biotechnology</option>
+                            <option>Entomology</option>
+                            <option>Horticulture</option>
+                            <option>Plant Pathology</option>
+                            <option>Soil Sciences</option>
+                            <option>Plant Breeding and Genetics</option>
+                            <option>Agronomy</option>
+                            <option>Integrated Water Resources Management</option>
+                            <option>Doctor of Veterinary Medicine</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="semester">Semester</label>
+                        <select id="semester" required>
+                            <option value="">Select Semester</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+                            <option value="9">Semester 9</option>
+                            <option value="10">Semester 10</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">District</label>
+                        <input type="text" id="district" placeholder="Enter district" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="assignedHostel">Assigned Hostel</label>
+                        <select id="assignedHostel" required>
+                            <option value="">Select Hostel</option>
+                            <!-- Options will be populated by JS -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="roomNumber">Room Number</label>
+                        <input type="text" id="roomNumber" placeholder="e.g., A-101" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hostelFee">Hostel Fee Status</label>
+                        <select id="hostelFee" required>
+                            <option value="pending">Pending</option>
+                            <option value="paid">Paid</option>
+                            <option value="defaulted">Defaulted</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="addStudentBtn" class="action-button add">Add Student</button>
+                    <button type="button" id="updateStudentBtn" class="action-button update"
+                        style="display: none;">Update Student</button>
+                </form>
+                <p id="studentMessage" class="message"></p>
+            </section>
+
+            <!-- Student List Section -->
+            <section class="student-list-section">
+                <h2>Manage Students</h2>
+                <div class="controls">
+                    <div class="batch-delete-controls"
+                        style="display:flex; gap:10px; align-items:center; margin-right:auto;">
+                        <select id="batchDeptInput"
+                            style="padding:8px; border-radius:4px; border:1px solid #ddd; max-width: 150px;">
+                            <option value="">Select Dept</option>
+                            <option>Agriculture</option>
+                            <option>Civil Engineering</option>
+                            <option>Marine Science</option>
+                            <option>Geology</option>
+                            <option>Environment Science</option>
+                            <option>Water Resources Management</option>
+                            <option>Computer Science</option>
+                            <option>Economics</option>
+                            <option>Sociology</option>
+                            <option>Political Science</option>
+                            <option>International Relations</option>
+                            <option>Business Administration</option>
+                            <option>English</option>
+                            <option>Islamic Studies</option>
+                            <option>Education</option>
+                            <option>English (Linguistics)</option>
+                            <option>Marine Biology</option>
+                            <option>Marine Fisheries</option>
+                            <option>Biotechnology</option>
+                            <option>Entomology</option>
+                            <option>Horticulture</option>
+                            <option>Plant Pathology</option>
+                            <option>Soil Sciences</option>
+                            <option>Plant Breeding and Genetics</option>
+                            <option>Agronomy</option>
+                            <option>Integrated Water Resources Management</option>
+                            <option>Doctor of Veterinary Medicine</option>
+                        </select>
+                        <input type="text" id="batchYearInput" placeholder="Batch (e.g. 2k21)"
+                            style="padding:8px; border-radius:4px; border:1px solid #ddd;">
+                        <button id="batchDeleteBtn" class="delete-btn" style="background:#dc3545;">Delete Batch</button>
+                    </div>
+                    <label for="hostelFilter">Filter by Hostel:</label>
+                    <label for="hostelFilter">Filter by Hostel:</label>
+                    <select id="hostelFilter">
+                        <option value="">All Hostels</option>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                </div>
+                <div class="students-table-container">
+                    <table id="studentTable" class="students-table">
+                        <thead>
+                            <tr>
+                                <th>Picture</th>
+                                <th>Name</th>
+                                <th>Reg No.</th>
+                                <th>Father's Name</th>
+                                <th>Degree</th>
+                                <th>Department</th>
+                                <th>Semester</th>
+                                <th>District</th>
+                                <th>Assigned Hostel</th>
+                                <th>Room No.</th>
+                                <th>Fee Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- Student rows will be dynamically loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin:10px 0 0 0; display:flex; gap:10px; flex-wrap:wrap;">
+                    <a id="downloadStudentsPdfBottom" class="action-button" href="#" style="display:none;">Download
+                        Students PDF</a>
+                    <a id="downloadStudentsCsvBtn" class="action-button" href="#" download="students_data.csv"
+                        style="background:#0e7ae6;color:#fff;">Download Excel Sheet</a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" style="display:none;">
+        <span class="image-modal-close" id="imageModalClose">&times;</span>
+        <img class="image-modal-content" id="imageModalImg" alt="Student Image">
+        <div id="imageModalCaption" class="image-modal-caption"></div>
+    </div>
+    <!-- JAVASCRIPT PATH: This assumes 'students.js' is in the 'js' folder. -->
+    <script src="../JS/cleanup.js"></script>
+    <script type="module" src="../JS/apiHelper.js"></script>
+    <script type="module" src="../JS/students.js"></script>
+
+    <script>
+        document.getElementById("downloadStudentsCsvBtn")?.addEventListener("click", function (e) {
+            e.preventDefault(); // prevent HTML page from being downloaded
+
+            const table = document.getElementById("studentTable");
+            if (!table) {
+                alert("❌ Table not found!");
+                return;
+            }
+
+            // Collect and clean up table data
+            const rows = Array.from(table.querySelectorAll("tr"));
+            const csvContent = rows.map(row => {
+                const cols = Array.from(row.querySelectorAll("th, td"));
+                return cols.map(col => `"${(col.innerText || '').trim().replace(/"/g, '""')}"`).join(",");
+            }).join("\n");
+
+            // Create a downloadable CSV file
+            const blob = new Blob(["\ufeff" + csvContent], { type: "text/csv;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "students_data.csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+
+</html>

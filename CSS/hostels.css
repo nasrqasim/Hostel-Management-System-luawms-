@@ -1,0 +1,573 @@
+ /* Styling specific to the Hostel Management page (hostels.html) */
+
+/* Hostel List Section */
+.hostel-list-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.hostel-list-section h2 {
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.hostel-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.hostel-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e2e6ea;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    text-align: center;
+    position: relative;
+}
+
+.hostel-card:hover {
+    transform: translateY(-5px);
+}
+
+.hostel-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #007bff;
+    font-size: 1.5em;
+}
+
+.hostel-card p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.hostel-actions {
+    margin-top: 15px;
+}
+
+.action-button.delete-small {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.action-button.delete-small:hover {
+    background-color: #c82333;
+}
+
+
+/* Hostel Form Section */
+.hostel-form-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.hostel-form-section h2 {
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.hostel-form-section .form-group {
+    margin-bottom: 20px;
+}
+
+.hostel-form-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.hostel-form-section input[type="text"],
+.hostel-form-section input[type="file"],
+.hostel-form-section select {
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.hostel-form-section input[type="text"]:focus,
+.hostel-form-section select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.action-button.add {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.action-button.add:hover {
+    background-color: #218838;
+}
+
+.action-button.delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.action-button.delete:hover {
+    background-color: #c82333;
+}
+
+.message {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+/* New styles for the warden search input and results list */
+.form-group-relative {
+    position: relative;
+}
+
+#wardenSearchResults {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 0;
+    list-style: none;
+}
+
+#wardenSearchResults li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#wardenSearchResults li:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .hostel-list-section,
+    .hostel-form-section {
+        padding: 20px;
+    }
+
+    .hostel-cards-container {
+        grid-template-columns: 1fr; /* Stack cards on small screens */
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button-group button {
+        width: 100%;
+    }
+
+    .hostel-form-section input[type="text"],
+    .hostel-form-section input[type="file"],
+    .hostel-form-section select {
+        width: 100%;
+    }
+    
+}
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.modal-content p {
+    margin: 16px 0 24px 0;
+    color: #666;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.modal-button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modal-button.primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.modal-button.secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+/* Student Table Styles */
+.student-table-container,
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.table-wrapper {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.student-table,
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.student-table thead,
+.data-table thead {
+    background-color: #0e458a;
+    color: white;
+}
+
+.student-table th,
+.data-table th {
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #0e458a;
+}
+
+.student-table td,
+.data-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #e2e6ea;
+    vertical-align: top;
+}
+
+.student-table tbody tr:nth-child(even),
+.data-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.student-table tbody tr:hover,
+.data-table tbody tr:hover {
+    background-color: #e3f2fd;
+}
+
+.student-table tbody tr:last-child td,
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive table adjustments */
+@media (max-width: 768px) {
+    .student-table,
+    .data-table {
+        font-size: 12px;
+    }
+    
+    .student-table th,
+    .student-table td,
+    .data-table th,
+    .data-table td {
+        padding: 8px 4px;
+    }
+    
+    .student-table th:nth-child(1),
+    .student-table td:nth-child(1),
+    .data-table th:nth-child(1),
+    .data-table td:nth-child(1) {
+        width: 50px;
+    }
+    
+    .student-table th:nth-child(2),
+    .student-table td:nth-child(2),
+    .data-table th:nth-child(2),
+    .data-table td:nth-child(2) {
+        min-width: 120px;
+    }
+    
+    .student-table th:nth-child(3),
+    .student-table td:nth-child(3),
+    .data-table th:nth-child(3),
+    .data-table td:nth-child(3) {
+        min-width: 100px;
+    }
+    
+    .student-table th:nth-child(4),
+    .student-table td:nth-child(4),
+    .data-table th:nth-child(4),
+    .data-table td:nth-child(4) {
+        min-width: 100px;
+    }
+    
+    .student-table th:nth-child(5),
+    .student-table td:nth-child(5),
+    .data-table th:nth-child(5),
+    .data-table td:nth-child(5) {
+        width: 80px;
+    }
+}
+
+/* No data message styling */
+.no-data {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-style: italic;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* Room-wise display styling */
+.room-wise-container {
+    margin-top: 20px;
+}
+
+.room-section {
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.room-header {
+    background-color: #0e458a;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.room-capacity {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.room-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.room-table thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.room-table th {
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.room-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #e2e6ea;
+    vertical-align: top;
+}
+
+.room-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.room-table tbody tr:hover {
+    background-color: #e3f2fd;
+}
+
+.room-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Empty slot styling */
+.room-table .empty-slot {
+    background-color: #fff3cd !important;
+    color: #856404;
+    font-style: italic;
+}
+
+.room-table .empty-slot:hover {
+    background-color: #ffeaa7 !important;
+}
+
+/* Responsive room-wise display */
+@media (max-width: 768px) {
+    .room-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .room-capacity {
+        font-size: 0.8em;
+    }
+    
+    .room-table {
+        font-size: 12px;
+    }
+    
+    .room-table th,
+    .room-table td {
+        padding: 8px 4px;
+    }
+}
+
+/* ===== Excel-like Hostel Details ===== */
+.excel-hostel-header{
+    background:#8bc34a; /* green header like reference */
+    color:#122b09;
+    font-weight:700;
+    text-align:center;
+    padding:12px 10px;
+    border-radius:6px;
+    margin:6px 0 16px 0;
+}
+
+.excel-rooms-wrapper{
+    display:block;
+}
+
+.excel-room-block{
+    margin-bottom:18px;
+    border:1px solid #d8dde3;
+    border-radius:6px;
+    background:#fff;
+    overflow:hidden;
+}
+
+.excel-room-strip{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 12px;
+    background:#0e458a; /* blue header strip */
+    color:#fff;
+    font-weight:600;
+}
+
+.excel-room-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.excel-room-table thead th{
+    background:#0e458a; /* blue header */
+    color:#fff;
+    padding:8px 10px;
+    border:1px solid #c9d1db;
+}
+
+.excel-room-table td{
+    padding:8px 10px;
+    border:1px solid #e2e6ea;
+    background:#fdfdfd;
+}
+
+.excel-roomno-col{ /* keep last column narrow on wide screens */
+    width:110px;
+}
+
+.excel-roomno-cell{
+    background:#ffc107; /* yellow cell like reference */
+    color:#111;
+    font-weight:700;
+    text-align:center;
+}
+
+.excel-empty td:nth-child(2){
+    font-style:italic;
+}
+
+@media (max-width: 768px){
+    .excel-roomno-col{ width:88px; }
+    .excel-room-strip{ flex-direction:column; align-items:flex-start; gap:4px; }
+}

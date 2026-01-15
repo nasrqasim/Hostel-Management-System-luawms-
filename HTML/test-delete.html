@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Debugger</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+        }
+
+        .log {
+            background: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            max-height: 300px;
+            overflow: auto;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Delete Functionality Debugger</h1>
+    <p>This tool verifies that your browser can communicate with the backend to delete students.</p>
+
+    <div>
+        <h3>1. Authentication</h3>
+        <button onclick="login()">Login as Admin</button>
+        <span id="authStatus">Not Logged In</span>
+    </div>
+
+    <div>
+        <h3>2. Student Operations</h3>
+        <button onclick="fetchStudents()">Fetch Students</button>
+        <button onclick="createTestStudent()">Create 'TestDelete' Student</button>
+    </div>
+
+    <h3>Logs</h3>
+    <div id="logs" class="log"></div>
+
+    <h3>Student List (Direct from Server)</h3>
+    <ul id="studentList"></ul>
+
+    <script>
+        const API_URL = 'http://localhost:4000/api';
+        let token = '';
+
+        function log(msg, type = '') {
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            if (type) div.className = type;
+            document.getElementById('logs').prepend(div);
+        }
+
+        async function login() {
+            try {
+                log('Attempting login...');
+                const res = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: 'Admin', password: 'Admin@3456!' })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    token = data.data.token;
+                    document.getElementById('authStatus').textContent = '✅ Logged In';
+                    document.getElementById('authStatus').className = 'success';
+                    log('Login Success', 'success');
+                    fetchStudents();
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (e) {
+                log('Login Failed: ' + e.message, 'error');
+            }
+        }
+
+        async function fetchStudents() {
+            if (!token) return log('Please login first', 'error');
+            try {
+                // Cache bust
+                const res = await fetch(`${API_URL}/students?_t=${Date.now()}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                renderList(data.data);
+                log(`Fetched ${data.data.length} students`, 'success');
+            } catch (e) {
+                log('Fetch Failed: ' + e.message, 'error');
+            }
+        }
+
+        function renderList(students) {
+            const ul = document.getElementById('studentList');
+            ul.innerHTML = '';
+            students.forEach(s => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <b>${s.studentName}</b> (ID: ${s._id}) 
+                    <button onclick="deleteStudent('${s._id}')" style="background:#ffcccc">FORCE DELETE</button>
+                `;
+                ul.appendChild(li);
+            });
+        }
+
+        async function createTestStudent() {
+            if (!token) return log('Please login first', 'error');
+            try {
+                const res = await fetch(`${API_URL}/students`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        studentName: 'TestDelete',
+                        registrationNumber: 'DEL-' + Date.now(),
+                        fatherName: 'Test',
+                        assignedHostel: 'Porali' // Ensure this exists or use generic
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    log('Created Test Student', 'success');
+                    fetchStudents();
+                } else {
+                    log('Create Failed: ' + data.message, 'error');
+                }
+            } catch (e) {
+                log('Create Error: ' + e.message, 'error');
+            }
+        }
+
+        async function deleteStudent(id) {
+            if (!confirm('Confirm deletion of ' + id)) return;
+            try {
+                log(`Deleting ${id}...`);
+                const res = await fetch(`${API_URL}/students/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    log('Delete Success!', 'success');
+                    alert('Deleted!');
+                    fetchStudents();
+                } else {
+                    log('Delete Failed: ' + data.message, 'error');
+                    alert('Failed: ' + data.message);
+                }
+            } catch (e) {
+                log('Delete Error: ' + e.message, 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>

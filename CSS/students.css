@@ -1,0 +1,282 @@
+ /* Reusing dashboard.css for overall layout and navigation */
+
+.add-student-section,
+.student-list-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.add-student-section h2,
+.student-list-section h2 {
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.add-student-section .form-group {
+    margin-bottom: 20px;
+}
+
+.add-student-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.add-student-section input[type="text"],
+.add-student-section select {
+    width: calc(100% - 20px);
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.add-student-section input[type="text"]:focus,
+.add-student-section select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.add-student-section .action-button.add {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.add-student-section .action-button.add:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Student List Section (Table) */
+.student-list-section .controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.student-list-section .action-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.student-list-section .action-button.reset {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.student-list-section .action-button.reset:hover {
+    background-color: #e0a800;
+}
+
+.student-list-section .action-button.save {
+    background-color: #28a745;
+    color: white;
+}
+
+.student-list-section .action-button.save:hover {
+    background-color: #218838;
+}
+
+.students-table-container {
+    overflow-x: auto;
+}
+
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.students-table th,
+.students-table td {
+    padding: 12px 10px;
+    border: 1px solid #eee;
+    text-align: left;
+    white-space: nowrap; /* Prevent text wrapping in cells */
+}
+
+.students-table thead th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+.students-table tbody tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+/* Avatar styles (circular, keep existing layout) */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: inline-block;
+}
+
+.avatar-initials {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e0e7ff;
+    color: #3b82f6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Image modal/lightbox */
+.image-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.image-modal-content {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 8px;
+}
+
+.image-modal-close {
+    position: fixed;
+    top: 15px;
+    right: 25px;
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.image-modal-caption {
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    .image-modal-content {
+        max-width: 95%;
+        max-height: 70vh;
+    }
+}
+
+.students-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.students-table .fee-status-paid {
+    color: #28a745; /* Green */
+    font-weight: bold;
+}
+
+.students-table .fee-status-unpaid {
+    color: #dc3545; /* Red */
+    font-weight: bold;
+}
+
+.students-table input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.students-table .actions-cell button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.students-table .actions-cell button:hover {
+    background-color: #0056b3;
+}
+
+.students-table .actions-cell .delete-btn {
+    background-color: #dc3545;
+}
+
+.students-table .actions-cell .delete-btn:hover {
+    background-color: #c82333;
+}
+
+.students-table .edit-mode input[type="text"],
+.students-table .edit-mode select {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .student-list-section .controls {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .add-student-section .form-group {
+        margin-bottom: 15px;
+    }
+    .add-student-section input[type="text"],
+    .add-student-section select {
+        padding: 10px;
+        font-size: 14px;
+    }
+    .add-student-section .action-button.add {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+    .students-table th,
+    .students-table td {
+        padding: 8px 5px;
+        font-size: 0.8em;
+    }
+    .student-list-section .action-button {
+        padding: 8px 15px;
+        font-size: 0.8em;
+    }
+}

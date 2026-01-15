@@ -1,0 +1,133 @@
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.branding-header {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.branding-header h1 {
+    font-size: 28px;
+    margin: 0;
+}
+
+.login-form-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.login-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .login-container {
+        padding: 25px;
+        margin: 20px;
+    }
+
+    .branding-header h1 {
+        font-size: 24px;
+    }
+
+    .login-form-container h2 {
+        font-size: 22px;
+    }
+
+    .input-group input[type="text"],
+    .input-group input[type="password"] {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .login-button {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+}

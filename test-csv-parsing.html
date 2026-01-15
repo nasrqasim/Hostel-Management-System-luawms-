@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test CSV Parsing</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>CSV Parsing Test</h1>
+    <div id="testResults"></div>
+
+    <script>
+        const parseCSV = (csvText) => {
+            const lines = csvText.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim());
+            
+            const students = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim());
+                if (values.length >= 5) {
+                    students.push({
+                        sno: values[0],
+                        name: values[1],
+                        regNo: values[2],
+                        department: values[3], // Faculty column becomes Department
+                        roomNo: values[4]
+                    });
+                }
+            }
+            
+            return students;
+        };
+
+        const testCSVParsing = async () => {
+            const resultsDiv = document.getElementById('testResults');
+            
+            try {
+                // Test Magsi Hostel CSV
+                const response = await fetch('Hostel Allotment 2025 qm Upload (1).xlsx - Magsi Hostel.csv');
+                if (!response.ok) {
+                    throw new Error('CSV file not found');
+                }
+                
+                const csvText = await response.text();
+                const students = parseCSV(csvText);
+                
+                resultsDiv.innerHTML = `
+                    <div class="test-result success">
+                        <h3>✅ CSV Parsing Successful</h3>
+                        <p>Parsed ${students.length} students from Magsi Hostel CSV</p>
+                    </div>
+                    <h3>Sample Data:</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Name of Students</th>
+                                <th>Reg No</th>
+                                <th>Department</th>
+                                <th>Room No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${students.slice(0, 5).map(student => `
+                                <tr>
+                                    <td>${student.sno}</td>
+                                    <td>${student.name}</td>
+                                    <td>${student.regNo}</td>
+                                    <td>${student.department}</td>
+                                    <td>${student.roomNo}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="test-result error">
+                        <h3>❌ CSV Parsing Failed</h3>
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        };
+
+        // Run test when page loads
+        testCSVParsing();
+    </script>
+</body>
+</html>
+
+

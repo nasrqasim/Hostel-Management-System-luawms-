@@ -1,0 +1,108 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS - Logs</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="../CSS/logs.css">
+    <link rel="stylesheet" href="../CSS/unified-cards.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="navbar">
+            <div class="welcome-message" id="welcomeMessage"></div>
+            <div class="navbar-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." id="searchBar">
+                </div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="hostels.html">Hostels</a></li>
+                    <li><a href="HostelDetails.html">Hostel Details</a></li>
+                    <li><a href="users.html">Users</a></li>
+                    <li><a href="logs.html" class="active">Log/History</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="feeManagement.html">Fee Management</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="logs-section">
+                <h2>System Logs / History</h2>
+                <div class="filters">
+                    <div class="form-group">
+                        <label for="filterHostel">Filter by Hostel:</label>
+                        <select id="filterHostel">
+                            <option value="">All Hostels</option>
+                            <!-- Options will be dynamically loaded -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterUser">Filter by User:</label>
+                        <select id="filterUser">
+                            <option value="">All Users</option>
+                            <!-- Options will be dynamically loaded -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterAction">Filter by Action:</label>
+                        <select id="filterAction">
+                            <option value="">All Actions</option>
+                            <option value="ADD">Add</option>
+                            <option value="UPDATE">Update</option>
+                            <option value="DELETE">Delete</option>
+                            <option value="LOGIN">Login</option>
+                            <option value="LOGOUT">Logout</option>
+                            <option value="PAYMENT">Payment</option>
+                            <option value="PAGE_ACCESS">Page Access</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterDateRange">Date Range:</label>
+                        <select id="filterDateRange">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="logs-table-container">
+                    <table class="logs-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                                <th>Description</th>
+                                <th>Hostel</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logsTableBody">
+                            <!-- Log entries will be dynamically loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button id="prevPageBtn" disabled>Previous</button>
+                    <span id="currentPageInfo">Page 1 of 1</span>
+                    <button id="nextPageBtn" disabled>Next</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../JS/cleanup.js"></script>
+    <script type="module" src="../JS/apiHelper.js"></script>
+    <script type="module" src="../JS/logs.js"></script>
+</body>
+</html>

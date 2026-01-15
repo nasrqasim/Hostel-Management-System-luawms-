@@ -1,0 +1,100 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS - Users</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="../CSS/users.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+     
+    <div class="dashboard-container">
+        <header class="navbar">
+            <div class="welcome-message" id="welcomeMessage"></div>
+            <div class="navbar-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." id="searchBar">
+                </div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="hostels.html">Hostels</a></li>
+                    <li><a href="HostelDetails.html">Hostel Details</a></li>
+                    <li><a href="users.html" class="active">Users</a></li>
+                    <li><a href="logs.html">Log/History</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="feeManagement.html">Fee Management</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="user-list-section">
+                <h2>System Users</h2>
+                <div class="users-container" id="usersContainer">
+                    <!-- User cards will be populated here -->
+                </div>
+            </section>
+            
+            <section class="user-add-section" id="addUserSection">
+                <h2>Add New User</h2>
+                <div class="form-group">
+                    <label for="usernameInput">Username</label>
+                    <input type="text" id="usernameInput" placeholder="Enter username" required>
+                </div>
+                <!-- Updated Email input with a class for styling -->
+                <div class="form-group">
+                    <label for="emailInput">Email Address</label>
+                    <input type="email" id="emailInput" placeholder="Enter email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" id="passwordInput" placeholder="Enter password" required>
+                </div>
+                <div class="form-group">
+                    <label for="roleSelect">Role</label>
+                    <select id="roleSelect">
+                        <option value="warden">Warden</option>
+                        <option value="prohost">ProHost</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assignedHostelsSelect">Assigned Hostels (for Wardens)</label>
+                    <select id="assignedHostelsSelect" multiple>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                    <small>Hold Ctrl to select multiple hostels. Only applicable to 'warden' role.</small>
+                    <input type="text" id="assignedHostelsInput" placeholder="Or enter manually: Hostel1, Hostel2, etc." style="margin-top: 5px;">
+                </div>
+                <button id="addUserBtn" class="action-button add">Add User</button>
+                <p id="userMessage" class="message"></p>
+            </section>
+        </main>
+    </div>
+    <!-- Delete confirmation modal -->
+    <div id="deleteModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeDeleteModal">&times;</span>
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete <strong id="deleteUserName"></strong>?</p>
+            <div class="button-group">
+                <button id="confirmDeleteBtn" class="action-button delete">Delete</button>
+                <button id="cancelDeleteBtn" class="action-button cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <!-- JAVASCRIPT PATH: This assumes 'users.js' is in the 'js' folder, which is a sibling to the 'HTML' folder. -->
+    <script src="../JS/cleanup.js"></script>
+    <script type="module" src="../JS/apiHelper.js"></script>
+    <script type="module" src="../JS/users.js"></script>
+</body>
+</html>

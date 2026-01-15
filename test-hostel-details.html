@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Hostel Details - CSV Data</title>
+    <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="CSS/hostels.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="navbar">
+            <div class="welcome-message">Test Hostel Details</div>
+            <div class="navbar-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search students..." id="searchRoomsInput">
+                </div>
+            </div>
+        </header>
+        <main class="main-content">
+            <section>
+                <h2 id="hostelTitle">Hostel Details</h2>
+                <div class="controls" style="margin:8px 0 14px 0;">
+                  <label for="hostelSelect">Select Hostel:</label>
+                  <select id="hostelSelect">
+                    <option value="Magsi">Magsi Hostel</option>
+                    <option value="Hingol">Hingol Hostel</option>
+                    <option value="Armabel">Armabel Hostel</option>
+                    <option value="Porali">Porali Hostel</option>
+                  </select>
+                </div>
+                <div id="hostelStats" class="hostel-stats"></div>
+                <div id="roomsContainer" class="rooms-container"></div>
+                <p id="detailMessage" class="message"></p>
+            </section>
+        </main>
+    </div>
+    <script src="JS/cleanup.js"></script>
+    <script type="module" src="JS/apiHelper.js"></script>
+    <script type="module" src="JS/hostelDetails.js"></script>
+</body>
+</html>
+
+

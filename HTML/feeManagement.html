@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS - Fee Management</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="../CSS/feeManagement.css">
+    <link rel="stylesheet" href="../CSS/unified-cards.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="navbar">
+            <div class="welcome-message" id="welcomeMessage"></div>
+            <div class="navbar-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." id="searchBar">
+                </div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="hostels.html">Hostels</a></li>
+                    <li><a href="HostelDetails.html">Hostel Details</a></li>
+                    <li><a href="users.html">Users</a></li>
+                    <li><a href="logs.html">Log/History</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="feeManagement.html" class="active">Fee Management</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <!-- Mark Payment Section (Simplified) -->
+            <section class="mark-payment-section">
+                <h2>Mark Payment</h2>
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="registrationNumberInput">Registration Number</label>
+                        <input type="text" id="registrationNumberInput" placeholder="e.g., 2K23-CS-98" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="semesterSelect">Semester</label>
+                        <select id="semesterSelect" required>
+                            <option value="">Select semester</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+                            <option value="9">Semester 9</option>
+                            <option value="10">Semester 10</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="challanNumberInput">Challan Number</label>
+                        <input type="text" id="challanNumberInput" placeholder="Enter challan number" required>
+                    </div>
+                    <button type="submit" class="action-button mark-paid">Mark as Paid</button>
+                </form>
+                <p id="paymentMessage" class="message"></p>
+            </section>
+
+            <!-- Defaulters Section -->
+
+            <!-- Defaulters Section -->
+            <section class="defaulters-section">
+                <h2>Fee Defaulters</h2>
+                <div class="controls">
+                    <button id="checkDefaultersBtn" class="action-button check">Check Defaulters</button>
+                    <button id="reEnrollBtn" class="action-button re-enroll" style="display: none;">Re-enroll Student</button>
+                </div>
+                <div class="defaulters-table-container">
+                    <table class="defaulters-table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Registration No.</th>
+                                <th>Department</th>
+                                <th>Semester</th>
+                                <th>Challan No.</th>
+                                <th>Amount</th>
+                                <th>Days Overdue</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="defaultersTableBody">
+                            <!-- Defaulters will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- All Challans Section -->
+            <section class="all-challans-section">
+                <h2>All Challans</h2>
+                <div class="controls">
+                    <label for="statusFilter">Filter by Status:</label>
+                    <select id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="paid">Paid</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                    <button id="downloadFeesPdfBtn" class="action-button" style="margin-left:10px;">Download Fees PDF</button>
+                </div>
+                <div class="challans-table-container">
+                    <table class="challans-table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Registration No.</th>
+                                <th>Department</th>
+                                <th>Semester</th>
+                                <th>Challan No.</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="challansTableBody">
+                            <!-- All challans will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Fee Structure Section (moved below All Challans) -->
+            <section class="all-challans-section" style="margin-top:20px">
+                <h2>Fee Structure (Semester-wise)</h2>
+                <div class="controls">
+                    <label for="statusFilter">Filter by Status:</label>
+                    <select id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="paid">Paid</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                    <label for="hostelFilter" style="margin-left: 20px;">Filter by Hostel:</label>
+                    <select id="hostelFilter">
+                        <option value="">All Hostels</option>
+                        <!-- Hostels will be loaded dynamically -->
+                    </select>
+                </div>
+                <div class="challans-table-container">
+                    <table class="challans-table" id="feeStructureTable">
+                        <thead id="feeStructureHead">
+                            <!-- Dynamically rendered: Name | Reg | Dept | Room No | Assigned Hostel | Sem1..SemN -->
+                        </thead>
+                        <tbody id="feeStructureBody">
+                            <!-- Rows for each student with Paid/Pending per semester -->
+                        </tbody>
+                    </table>
+                    <div style="margin-top:12px;">
+                        <button id="downloadFeesCsvBtn" class="action-button" style="background:#0e7ae6;color:#fff;">
+                            <i class="fas fa-download" style="margin-right:6px;"></i> Download Excel Sheet
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Re-enrollment Modal -->
+    <div id="reEnrollModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Re-enroll Student</h2>
+            <form id="reEnrollForm">
+                <div class="form-group">
+                    <label for="reEnrollChallanNumber">Challan Number</label>
+                    <input type="text" id="reEnrollChallanNumber" placeholder="Enter challan number" required>
+                </div>
+                <div class="form-group">
+                    <label for="reEnrollStudentId">Student ID</label>
+                    <input type="text" id="reEnrollStudentId" readonly>
+                </div>
+                <button type="submit" class="action-button confirm">Confirm Re-enrollment</button>
+            </form>
+            <p id="reEnrollMessage" class="message"></p>
+        </div>
+    </div>
+
+    <script src="../JS/cleanup.js"></script>
+    <script type="module" src="../JS/apiHelper.js"></script>
+    <script type="module" src="../JS/feeManagement.js"></script>
+</body>
+</html>

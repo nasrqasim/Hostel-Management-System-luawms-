@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management System - Login</title>
+    <!-- CSS path: Goes up one level from HTML folder, then into CSS folder -->
+    <link rel="stylesheet" href="../CSS/login.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="branding-header">
+            <h1>Hostel Management System</h1>
+        </div>
+        <div class="login-form-container">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username or Email Address</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember Me</label>
+                </div>
+                <button type="submit" class="login-button">Log In</button>
+                <a href="#" class="forgot-password">Lost your password?</a>
+            </form>
+            <p id="errorMessage" class="error-message"></p>
+        </div>
+    </div>
+    <!-- JavaScript path: Goes up one level from HTML folder, then into JS folder -->
+    <script src="../JS/login.js"></script>
+    <script src="../JS/cleanup.js"></script>
+</body>
+</html>

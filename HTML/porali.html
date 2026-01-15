@@ -1,0 +1,120 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porali Hostel Details</title>
+    <!--
+        CORRECTED CSS PATH:
+        This path assumes 'porali.html' is in the 'HTML' folder,
+        and 'style.css' is in the 'CSS' folder,
+        where 'HTML' and 'CSS' are siblings in the main project directory.
+        '../' goes up one level from the 'HTML' folder to the project root,
+        then 'CSS/' goes into the 'CSS' folder to find 'style.css'.
+    -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <!-- Google Fonts for 'Inter' -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <!--
+                CORRECTED LOGO LINK AND IMAGE PATH:
+                'index.html' is in the same 'HTML' folder.
+                'images.1' is a sibling folder to 'HTML' and 'CSS'.
+            -->
+            <a href="index.html" class="logo-link">
+                <img src="../images.1/Logo.png" alt="LUAWMS Logo" onerror="this.onerror=null;this.src='https://placehold.co/50x50/cccccc/000000?text=LOGO';" class="luawms-logo">
+                <span>LASBELA UNIVERSITY OF AGRICULTURE, WATER AND MARINE SCIENCES</span>
+            </a>
+        </div>
+        <div class="search-container">
+            <input type="text" id="mainSearchBar" placeholder="Search...">
+            <button class="search-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
+                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35"/>
+                </svg>
+            </button>
+            <button class="clear-search-button" id="clearSearchBar">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
+                    <path d="M6.41 6.41a1 1 0 011.41 0L12 10.59l4.18-4.18a1 1 0 111.41 1.41L13.41 12l4.18 4.18a1 1 0 01-1.41 1.41L12 13.41l-4.18 4.18a1 1 0 01-1.41-1.41L10.59 12 6.41 7.82a1 1 0 010-1.41z"/>
+                </svg>
+            </button>
+        </div>
+        <!--
+            CORRECTED LOGIN BUTTON PATH:
+            'login.html' is in the same 'HTML' folder as 'porali.html'.
+        -->
+        <button class="login-button" onclick="window.location.href='login.html'">Login</button>
+    </header>
+
+    <main class="magsi-details-container">
+        <!--
+            CORRECTED HERO IMAGE PATH:
+            'images.1' is a sibling folder to 'HTML'.
+        -->
+        <section class="magsi-hero" style="background-image: url('../images.1/hostel_porali.jpg');">
+            <h2>Porali Hostel</h2>
+            <p>Your comfortable home away from home at LUAWMS.</p>
+        </section>
+
+        <section class="hostel-info-section">
+            <div class="info-card">
+                <h3>Hostel Name</h3>
+                <p>Porali</p>
+            </div>
+            <div class="info-card">
+                <h3>Number of Students</h3>
+                <p>60</p>
+            </div>
+            <div class="info-card">
+                <h3>Number of Rooms</h3>
+                <p>30</p>
+            </div>
+        </section>
+
+        <section class="room-occupancy-section">
+            <h3>Room Occupancy Overview</h3>
+            <div class="table-responsive">
+                <table class="room-table">
+                    <thead>
+                        <tr>
+                            <th>Room No.</th>
+                            <th>Capacity</th>
+                            <th>Occupied</th>
+                            <th>Available</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>A-01</td><td>2</td><td>2</td><td>0</td></tr>
+                        <tr><td>A-02</td><td>2</td><td>1</td><td>1</td></tr>
+                        <tr><td>A-03</td><td>2</td><td>2</td><td>0</td></tr>
+                        <tr><td>A-04</td><td>2</td><td>0</td><td>2</td></tr>
+                        <tr><td>B-01</td><td>3</td><td>3</td><td>0</td></tr>
+                        <tr><td>B-02</td><td>3</td><td>2</td><td>1</td></tr>
+                        <tr><td>C-01</td><td>1</td><td>1</td><td>0</td></tr>
+                        <tr><td>C-02</td><td>1</td><td>0</td><td>1</td></tr>
+                        <!-- More rooms can be added dynamically or hardcoded -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="back-button-container">
+            <!--
+                BACK BUTTON PATH:
+                'index.html' is in the same 'HTML' folder as 'porali.html'.
+            -->
+            <button class="back-button" onclick="window.location.href='index.html'">← Back to All Hostels</button>
+        </div>
+    </main>
+
+    <!--
+        CORRECTED JAVASCRIPT PATH:
+        'JS' folder is a sibling to 'HTML'.
+    -->
+    <script src="../JS/landing.js"></script>
+    <script src="../JS/cleanup.js"></script>
+</body>
+</html>

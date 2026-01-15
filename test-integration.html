@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS Integration Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 3px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        button { margin: 5px; padding: 8px 15px; cursor: pointer; }
+        pre { background-color: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>HMS Integration Test Suite</h1>
+    
+    <div class="test-section">
+        <h2>API Connection Test</h2>
+        <button onclick="testApiConnection()">Test API Connection</button>
+        <div id="apiTestResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Hostel CRUD Tests</h2>
+        <button onclick="testHostelCreate()">Test Create Hostel</button>
+        <button onclick="testHostelRead()">Test Read Hostels</button>
+        <button onclick="testHostelUpdate()">Test Update Hostel</button>
+        <button onclick="testHostelDelete()">Test Delete Hostel</button>
+        <div id="hostelTestResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Student CRUD Tests</h2>
+        <button onclick="testStudentCreate()">Test Create Student</button>
+        <button onclick="testStudentRead()">Test Read Students</button>
+        <button onclick="testStudentUpdate()">Test Update Student</button>
+        <button onclick="testStudentDelete()">Test Delete Student</button>
+        <div id="studentTestResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>User CRUD Tests</h2>
+        <button onclick="testUserCreate()">Test Create User</button>
+        <button onclick="testUserRead()">Test Read Users</button>
+        <button onclick="testUserUpdate()">Test Update User</button>
+        <button onclick="testUserDelete()">Test Delete User</button>
+        <div id="userTestResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Logging Tests</h2>
+        <button onclick="testLogging()">Test Logging</button>
+        <button onclick="testLogRead()">Test Read Logs</button>
+        <div id="logTestResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Payment Tests</h2>
+        <button onclick="testPayment()">Test Payment</button>
+        <div id="paymentTestResult"></div>
+    </div>
+
+    <script type="module">
+        import ApiHelper from './JS/apiHelper.js';
+
+        window.ApiHelper = ApiHelper;
+
+        // Test API Connection
+        window.testApiConnection = async () => {
+            const resultDiv = document.getElementById('apiTestResult');
+            try {
+                const response = await ApiHelper.get('/health');
+                resultDiv.innerHTML = `<div class="test-result success">API Connection Successful: ${JSON.stringify(response, null, 2)}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">API Connection Failed: ${error.message}</div>`;
+            }
+        };
+
+        // Test Hostel CRUD
+        window.testHostelCreate = async () => {
+            const resultDiv = document.getElementById('hostelTestResult');
+            try {
+                const testHostel = {
+                    name: `Test Hostel ${Date.now()}`,
+                    warden: 'Test Warden',
+                    capacity: 100,
+                    imageUrl: 'https://placehold.co/400x250',
+                    username: 'testuser'
+                };
+                const response = await ApiHelper.post('/hostels', testHostel);
+                resultDiv.innerHTML = `<div class="test-result success">Hostel Created: ${JSON.stringify(response, null, 2)}</div>`;
+                window.testHostelId = response.data._id;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Hostel Create Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testHostelRead = async () => {
+            const resultDiv = document.getElementById('hostelTestResult');
+            try {
+                const response = await ApiHelper.get('/hostels');
+                resultDiv.innerHTML = `<div class="test-result success">Hostels Retrieved: ${response.data.length} hostels found</div><pre>${JSON.stringify(response.data, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Hostel Read Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testHostelUpdate = async () => {
+            const resultDiv = document.getElementById('hostelTestResult');
+            if (!window.testHostelId) {
+                resultDiv.innerHTML = `<div class="test-result error">No test hostel ID available. Create a hostel first.</div>`;
+                return;
+            }
+            try {
+                const updateData = {
+                    name: `Updated Test Hostel ${Date.now()}`,
+                    warden: 'Updated Warden',
+                    capacity: 150,
+                    username: 'testuser'
+                };
+                const response = await ApiHelper.put(`/hostels/${window.testHostelId}`, updateData);
+                resultDiv.innerHTML = `<div class="test-result success">Hostel Updated: ${JSON.stringify(response, null, 2)}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Hostel Update Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testHostelDelete = async () => {
+            const resultDiv = document.getElementById('hostelTestResult');
+            if (!window.testHostelId) {
+                resultDiv.innerHTML = `<div class="test-result error">No test hostel ID available. Create a hostel first.</div>`;
+                return;
+            }
+            try {
+                const response = await ApiHelper.delete(`/hostels/${window.testHostelId}?username=testuser`);
+                resultDiv.innerHTML = `<div class="test-result success">Hostel Deleted: ${JSON.stringify(response, null, 2)}</div>`;
+                window.testHostelId = null;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Hostel Delete Failed: ${error.message}</div>`;
+            }
+        };
+
+        // Test Student CRUD
+        window.testStudentCreate = async () => {
+            const resultDiv = document.getElementById('studentTestResult');
+            try {
+                const testStudent = {
+                    studentName: `Test Student ${Date.now()}`,
+                    fatherName: 'Test Father',
+                    registrationNumber: `REG${Date.now()}`,
+                    degree: 'BS',
+                    department: 'Computer Science',
+                    semester: 3,
+                    district: 'Test District',
+                    assignedHostel: 'Armabel',
+                    roomNumber: 'A101',
+                    hostelFee: 'pending',
+                    username: 'testuser'
+                };
+                const response = await ApiHelper.post('/students', testStudent);
+                resultDiv.innerHTML = `<div class="test-result success">Student Created: ${JSON.stringify(response, null, 2)}</div>`;
+                window.testStudentId = response.data._id;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Student Create Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testStudentRead = async () => {
+            const resultDiv = document.getElementById('studentTestResult');
+            try {
+                const response = await ApiHelper.get('/students');
+                resultDiv.innerHTML = `<div class="test-result success">Students Retrieved: ${response.data.length} students found</div><pre>${JSON.stringify(response.data, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Student Read Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testStudentUpdate = async () => {
+            const resultDiv = document.getElementById('studentTestResult');
+            if (!window.testStudentId) {
+                resultDiv.innerHTML = `<div class="test-result error">No test student ID available. Create a student first.</div>`;
+                return;
+            }
+            try {
+                const updateData = {
+                    studentName: `Updated Test Student ${Date.now()}`,
+                    fatherName: 'Updated Father',
+                    registrationNumber: `REG${Date.now()}`,
+                    degree: 'MS',
+                    department: 'Information Technology',
+                    semester: 5,
+                    district: 'Updated District',
+                    assignedHostel: 'Magsi',
+                    roomNumber: 'B202',
+                    hostelFee: 'paid',
+                    username: 'testuser'
+                };
+                const response = await ApiHelper.put(`/students/${window.testStudentId}`, updateData);
+                resultDiv.innerHTML = `<div class="test-result success">Student Updated: ${JSON.stringify(response, null, 2)}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Student Update Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testStudentDelete = async () => {
+            const resultDiv = document.getElementById('studentTestResult');
+            if (!window.testStudentId) {
+                resultDiv.innerHTML = `<div class="test-result error">No test student ID available. Create a student first.</div>`;
+                return;
+            }
+            try {
+                const response = await ApiHelper.delete(`/students/${window.testStudentId}?username=testuser`);
+                resultDiv.innerHTML = `<div class="test-result success">Student Deleted: ${JSON.stringify(response, null, 2)}</div>`;
+                window.testStudentId = null;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Student Delete Failed: ${error.message}</div>`;
+            }
+        };
+
+        // Test User CRUD
+        window.testUserCreate = async () => {
+            const resultDiv = document.getElementById('userTestResult');
+            try {
+                const testUser = {
+                    username: `testuser${Date.now()}`,
+                    email: `test${Date.now()}@example.com`,
+                    role: 'staff',
+                    assignedHostels: ['Armabel', 'Magsi']
+                };
+                const response = await ApiHelper.post('/users', testUser);
+                resultDiv.innerHTML = `<div class="test-result success">User Created: ${JSON.stringify(response, null, 2)}</div>`;
+                window.testUserId = response.data._id;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">User Create Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testUserRead = async () => {
+            const resultDiv = document.getElementById('userTestResult');
+            try {
+                const response = await ApiHelper.get('/users');
+                resultDiv.innerHTML = `<div class="test-result success">Users Retrieved: ${response.data.length} users found</div><pre>${JSON.stringify(response.data, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">User Read Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testUserUpdate = async () => {
+            const resultDiv = document.getElementById('userTestResult');
+            if (!window.testUserId) {
+                resultDiv.innerHTML = `<div class="test-result error">No test user ID available. Create a user first.</div>`;
+                return;
+            }
+            try {
+                const updateData = {
+                    email: `updated${Date.now()}@example.com`,
+                    role: 'warden',
+                    assignedHostels: ['Hingol', 'Porali'],
+                    username: 'testuser'
+                };
+                const response = await ApiHelper.put(`/users/${window.testUserId}`, updateData);
+                resultDiv.innerHTML = `<div class="test-result success">User Updated: ${JSON.stringify(response, null, 2)}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">User Update Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testUserDelete = async () => {
+            const resultDiv = document.getElementById('userTestResult');
+            if (!window.testUserId) {
+                resultDiv.innerHTML = `<div class="test-result error">No test user ID available. Create a user first.</div>`;
+                return;
+            }
+            try {
+                const response = await ApiHelper.delete(`/users/${window.testUserId}?username=testuser`);
+                resultDiv.innerHTML = `<div class="test-result success">User Deleted: ${JSON.stringify(response, null, 2)}</div>`;
+                window.testUserId = null;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">User Delete Failed: ${error.message}</div>`;
+            }
+        };
+
+        // Test Logging
+        window.testLogging = async () => {
+            const resultDiv = document.getElementById('logTestResult');
+            try {
+                const testLog = {
+                    action: 'TEST_ACTION',
+                    description: 'Test log entry for integration testing',
+                    username: 'testuser',
+                    role: 'staff',
+                    entityType: 'Test'
+                };
+                const response = await ApiHelper.post('/logs', testLog);
+                resultDiv.innerHTML = `<div class="test-result success">Log Created: ${JSON.stringify(response, null, 2)}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Logging Failed: ${error.message}</div>`;
+            }
+        };
+
+        window.testLogRead = async () => {
+            const resultDiv = document.getElementById('logTestResult');
+            try {
+                const response = await ApiHelper.get('/logs');
+                resultDiv.innerHTML = `<div class="test-result success">Logs Retrieved: ${response.data.length} logs found</div><pre>${JSON.stringify(response.data.slice(0, 5), null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Log Read Failed: ${error.message}</div>`;
+            }
+        };
+
+        // Test Payment
+        window.testPayment = async () => {
+            const resultDiv = document.getElementById('paymentTestResult');
+            try {
+                const paymentData = {
+                    registrationNumber: 'TEST123',
+                    challanNumber: `CH${Date.now()}`,
+                    semester: 1,
+                    username: 'testuser'
+                };
+                const response = await ApiHelper.post('/challans/mark-paid', paymentData);
+                resultDiv.innerHTML = `<div class="test-result success">Payment Test: ${JSON.stringify(response, null, 2)}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="test-result error">Payment Test Failed: ${error.message}</div>`;
+            }
+        };
+
+        // Auto-run API connection test on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            testApiConnection();
+        });
+    </script>
+</body>
+</html> 

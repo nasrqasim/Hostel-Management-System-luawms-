@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Structure Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 3px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        button { margin: 5px; padding: 8px 15px; cursor: pointer; }
+        pre { background-color: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .controls { margin: 10px 0; }
+        .controls label { margin-right: 10px; }
+        .controls select { margin-right: 20px; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Fee Structure Enhancement Test</h1>
+    
+    <div class="test-section">
+        <h2>Test New Fee Structure Features</h2>
+        <p>This test verifies the new "Room No" and "Assigned Hostel" columns in the Fee Structure table, along with the hostel filter functionality.</p>
+        
+        <div class="controls">
+            <label for="statusFilter">Filter by Status:</label>
+            <select id="statusFilter">
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="overdue">Overdue</option>
+            </select>
+            <label for="hostelFilter">Filter by Hostel:</label>
+            <select id="hostelFilter">
+                <option value="">All Hostels</option>
+            </select>
+        </div>
+        
+        <div id="feeStructureContainer">
+            <table id="feeStructureTable">
+                <thead id="feeStructureHead">
+                    <!-- Will be populated dynamically -->
+                </thead>
+                <tbody id="feeStructureBody">
+                    <!-- Will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="testResults"></div>
+    </div>
+
+    <script type="module">
+        import ApiHelper from './JS/apiHelper.js';
+
+        // DOM elements
+        const statusFilter = document.getElementById('statusFilter');
+        const hostelFilter = document.getElementById('hostelFilter');
+        const feeStructureHead = document.getElementById('feeStructureHead');
+        const feeStructureBody = document.getElementById('feeStructureBody');
+        const testResults = document.getElementById('testResults');
+
+        // Global variables
+        let allStudents = [];
+        let allHostels = [];
+
+        // Load data
+        const loadData = async () => {
+            try {
+                // Load students
+                const studentsResponse = await ApiHelper.get('/students');
+                allStudents = studentsResponse.data;
+                
+                // Load hostels
+                const hostelsResponse = await ApiHelper.get('/hostels');
+                allHostels = hostelsResponse.data;
+                
+                populateHostelFilter();
+                renderFeeStructure();
+                
+                showResult('Data loaded successfully', 'success');
+                showResult(`Loaded ${allStudents.length} students and ${allHostels.length} hostels`, 'info');
+            } catch (error) {
+                showResult(`Error loading data: ${error.message}`, 'error');
+            }
+        };
+
+        // Populate hostel filter
+        const populateHostelFilter = () => {
+            hostelFilter.innerHTML = '<option value="">All Hostels</option>';
+            allHostels.forEach(hostel => {
+                const option = document.createElement('option');
+                option.value = hostel.name;
+                option.textContent = hostel.name;
+                hostelFilter.appendChild(option);
+            });
+        };
+
+        // Render fee structure table
+        const renderFeeStructure = () => {
+            if (!feeStructureHead || !feeStructureBody) return;
+            
+            feeStructureHead.innerHTML = '';
+            feeStructureBody.innerHTML = '';
+
+            // Get filter values
+            const selectedHostel = hostelFilter?.value || '';
+            const selectedStatus = statusFilter?.value || '';
+
+            // Filter students based on hostel selection
+            let filteredStudents = allStudents;
+            if (selectedHostel) {
+                filteredStudents = allStudents.filter(s => s.assignedHostel === selectedHostel);
+            }
+
+            if (filteredStudents.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="15" class="text-center">No students found.</td>';
+                feeStructureBody.appendChild(row);
+                return;
+            }
+
+            // Determine max semesters per student
+            const maxSemFor = (dept) => /doctor of veterinary medicine|dvm/i.test(dept || '') ? 10 : 8;
+
+            // Build header with new columns
+            const headRow = document.createElement('tr');
+            headRow.innerHTML = `
+                <th>Student</th>
+                <th>Reg No.</th>
+                <th>Department</th>
+                <th>Room No.</th>
+                <th>Assigned Hostel</th>
+                ${Array.from({length: 10}).map((_,i)=>`<th>Sem ${i+1}</th>`).join('')}
+            `;
+            feeStructureHead.appendChild(headRow);
+
+            // Render each student
+            filteredStudents.forEach(s => {
+                const maxSem = maxSemFor(s.department);
+                const tr = document.createElement('tr');
+                
+                // Handle fee table
+                let feeTable = {};
+                if (s.feeTable) {
+                    if (s.feeTable instanceof Map) {
+                        feeTable = Object.fromEntries(s.feeTable);
+                    } else if (typeof s.feeTable === 'object') {
+                        feeTable = s.feeTable;
+                    }
+                }
+                
+                const cells = Array.from({length: 10}).map((_,i) => {
+                    const sem = i+1;
+                    if (sem > maxSem) return '<td>-</td>';
+                    const status = (feeTable[`sem${sem}`] || 'pending').toLowerCase();
+                    const badge = status === 'paid' ? '<span style="color: green;">Paid</span>' : '<span style="color: orange;">Pending</span>';
+                    return `<td>${badge}</td>`;
+                }).join('');
+                
+                tr.innerHTML = `
+                    <td>${s.studentName || ''}</td>
+                    <td>${s.registrationNumber || ''}</td>
+                    <td>${s.department || ''}</td>
+                    <td>${s.roomNumber || 'N/A'}</td>
+                    <td>${s.assignedHostel || 'N/A'}</td>
+                    ${cells}
+                `;
+                feeStructureBody.appendChild(tr);
+            });
+
+            showResult(`Displaying ${filteredStudents.length} students${selectedHostel ? ` from ${selectedHostel}` : ''}`, 'info');
+        };
+
+        // Show test result
+        const showResult = (message, type) => {
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.textContent = message;
+            testResults.appendChild(resultDiv);
+        };
+
+        // Event listeners
+        statusFilter.addEventListener('change', () => {
+            renderFeeStructure();
+        });
+
+        hostelFilter.addEventListener('change', () => {
+            renderFeeStructure();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+        });
+    </script>
+</body>
+</html> 

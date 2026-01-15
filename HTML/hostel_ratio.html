@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Students Occupancy Ratio</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="../CSS/unified-cards.css">
+    <style>
+      .ratio-wrapper { max-width: 1100px; margin: 0 auto; }
+      .chart-card { padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background:#fff; }
+      .chart-canvas-wrap { position: relative; min-height: 420px; height: 420px; }
+      @media (max-width: 900px){ .ratio-wrapper { max-width: 95%; } }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="navbar">
+            <div class="welcome-message" id="welcomeMessage"></div>
+            <div class="navbar-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." id="searchBar" disabled>
+                </div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="hostels.html">Hostels</a></li>
+                    <li><a href="HostelDetails.html">Hostel Details</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="feeManagement.html">Fee Management</a></li>
+                    <li><a href="users.html">Users</a></li>
+                    <li><a href="logs.html">Log/History</a></li>
+                    <li><a href="hostel_ratio.html" class="active">Hostel Ratio</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="hostel-form-section ratio-wrapper">
+                <h2>Overview Of Hostel Free Space</h2>
+                <div class="chart-card">
+                    <div class="chart-canvas-wrap">
+                        <canvas id="ratioChart"></canvas>
+                    </div>
+                </div>
+                <p id="ratioMessage" class="message"></p>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../JS/cleanup.js"></script>
+    <script type="module" src="../JS/apiHelper.js"></script>
+    <script type="module" src="../JS/hostel_ratio.js"></script>
+</body>
+</html>
+
+

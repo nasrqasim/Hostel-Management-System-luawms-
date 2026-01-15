@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS Dashboard</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="../CSS/unified-cards.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="navbar">
+            <div class="welcome-message" id="welcomeMessage"></div>
+            <div class="navbar-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." id="searchBar">
+                </div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="hostels.html">Hostels</a></li>
+                    <li><a href="HostelDetails.html">Hostel Details</a></li>
+                    <li><a href="hostel_ratio.html">Hostel Ratio</a></li>
+                    <li><a href="users.html">Users</a></li>
+                    <li><a href="logs.html">Log/History</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="feeManagement.html">Fee Management</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section class="welcome-section">
+                <h2>Welcome to the Hostel Management System!</h2>
+                <p>This is your central hub for managing all aspects of the university hostels.</p>
+            </section>
+            <section class="stats-section">
+                <h3>System Statistics</h3>
+                <div class="stats-cards cards-grid-5">
+                    <div class="stat-card card">
+                        <h4>Total Hostels</h4>
+                        <p id="totalHostels">0</p>
+                    </div>
+                    <div class="stat-card card">
+                        <h4>Total Students</h4>
+                        <p id="totalStudents">0</p>
+                    </div>
+                    <div class="stat-card card">
+                        <h4>Active Users</h4>
+                        <p id="activeUsers">0</p>
+                    </div>
+                    <div class="stat-card card">
+                        <h4>Vacant Places</h4>
+                        <p id="vacantPlaces">0</p>
+                    </div>
+                    <div class="stat-card card">
+                        <h4>Overdue Fees</h4>
+                        <p id="overdueStudents" class="clickable-stat" data-link="feeManagement.html">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quick-actions-section">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons-container">
+                    <a href="students.html" class="action-button primary">Add New Student</a>
+                    <a href="hostels.html" class="action-button secondary">Manage Hostels</a>
+                    <a href="HostelDetails.html" class="action-button secondary">Hostel Details</a>
+                    <a href="users.html" class="action-button tertiary">Manage Users</a>
+                    <a href="logs.html" class="action-button info">View Activity Logs</a>
+                </div>
+            </section>
+
+            <section class="recent-activity-section">
+                <h3>Recent Activity</h3>
+                <div class="activity-list" id="recentActivityList"></div>
+                <a href="logs.html" class="view-all-link">View All Activity Logs &rarr;</a>
+            </section>
+            
+        </main>
+    </div>
+    <script src="../JS/cleanup.js"></script>
+    <script src="../JS/dashboard.js"></script>
+    
+</body>
+</html>
