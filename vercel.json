@@ -4,28 +4,24 @@
     {
       "src": "api/index.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "HTML/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "CSS/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "JS/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "images.1/**/*",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/api/index.js"
+    },
+    {
+      "src": "/CSS/(.*)",
+      "dest": "/CSS/$1"
+    },
+    {
+      "src": "/JS/(.*)",
+      "dest": "/JS/$1"
+    },
+    {
+      "src": "/images.1/(.*)",
+      "dest": "/images.1/$1"
     },
     {
       "src": "/(.*)",
