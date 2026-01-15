@@ -2,6 +2,57 @@
 
 A comprehensive hostel management system for Lasbela University of Agriculture, Water and Marine Sciences (LUAWMS).
 
+## 🚀 Render Deployment
+
+This project is configured for automatic deployment on Render.
+
+### Environment Variables
+
+Add these environment variables in your Render dashboard:
+
+```env
+MONGODB_URI=mongodb+srv://HMS:HMS2345@cluster0.5uheoxx.mongodb.net/HMS?retryWrites=true&w=majority
+JWT_SECRET=yourSecretKeyHere
+PORT=10000
+```
+
+### Build Configuration
+
+- **Build Command**: `npm install`
+- **Start Command**: `npm start`
+
+### Local Development
+
+#### Prerequisites
+
+1. **Node.js** (v14 or higher)
+2. **MongoDB** (running locally on port 27017)
+
+#### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/nasrqasim/Hostel-Management-System-luawms-
+   cd "FYP-Hostel Management system"
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm run install-all
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   # Copy .env.example to .env in server directory
+   cp .env.example server/.env
+   # Update with your local MongoDB URI
+   ```
+
+4. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
 ## Features
 
 - **Hostel Management**: Add, update, delete hostels dynamically
