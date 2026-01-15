@@ -5,7 +5,9 @@
     "scripts": {
         "start": "node server/src/server.js",
         "dev": "npm run dev --prefix server",
-        "install-all": "npm install && npm install --prefix server"
+        "install-all": "npm install && npm install --prefix server",
+        "build": "npm install && cd server && npm install",
+        "vercel-build": "npm install && cd server && npm install"
     },
     "dependencies": {
         "bcryptjs": "^3.0.3",
